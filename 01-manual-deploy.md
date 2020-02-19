@@ -224,7 +224,7 @@ where:
 1. Run the following to get the webhook details from the build config 
 
 ```
-kubectl describe bc {Name} -n ${DEV_NAMESPACE}
+oc describe bc {Name} -n ${DEV_NAMESPACE}
 ```
 
 where:
