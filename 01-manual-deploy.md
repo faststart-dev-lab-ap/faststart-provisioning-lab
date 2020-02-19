@@ -205,7 +205,7 @@ where:
 3. Create the buildconfig resource in the cluster
 
 ```
-kubectl create -n ${DEV_NAMESPACE} -f buildconfig.yaml
+oc create -n ${DEV_NAMESPACE} -f buildconfig.yaml
 ```
 
 where:
