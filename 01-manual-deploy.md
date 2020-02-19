@@ -14,6 +14,16 @@ export DEV_NAMESPACE="userXX-dev"
 ```
 ### Create a new namespace
 
+1. Open a browser to cloud.ibm.com, select Kedar's account and open the resource list.
+
+2. Filter the resource groups to the `faststart-xxx` resource group.
+
+3. Select the cluster and open the `Access` tab of the cluster page
+
+4. Follow the instructions to login.
+
+5. Create the namespace
+
 ```
 oc create namespace "${DEV_NAMESPACE}"
 ```
@@ -23,14 +33,13 @@ oc create namespace "${DEV_NAMESPACE}"
 Jenkins ephemeral provides a kubernetes native version of Jenkins that dynamically provisions build agents on-demand. It's
 _ephemeral_ meaning it doesn't allocate any persistent storage in the cluster.
 
-1. Log into the cluster following the instructions on the `Access` tab of the cluster page
-2. Run the following command to provision the Jenkins instance in your namespace
+1. Run the following command to provision the Jenkins instance in your namespace
 
 ```
 oc new-app jenkins-ephemeral -n "${DEV_NAMESPACE}"
 ```
 
-3. Open the OpenShift console and navigate to your project/namespace (i.e. user01-dev) to see the Jenkins instance running
+2. Open the OpenShift console and navigate to your project/namespace (i.e. user01-dev) to see the Jenkins instance running
 
 
 ### Create a project from the template in the FastStart git org
