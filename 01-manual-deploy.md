@@ -124,6 +124,7 @@ needs to be added that contains the git credentials.
 
 ```
 apiVersion: v1
+kind: Secret
 metadata:
   annotations:
     build.openshift.io/source-secret-match-uri-1: https://github.com/ibm-garage-cloud/*
