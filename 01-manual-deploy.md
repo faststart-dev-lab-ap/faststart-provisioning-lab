@@ -5,14 +5,14 @@
 For these exercises you will be asked for a `DEV_NAMESPACE`. That value should be the name 
 you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
 
-### Set an environment variable for your namespace
+### 1. Set an environment variable for your namespace
 
 1. Export an environment variable. This will be used 
 
 ```
 export DEV_NAMESPACE="userXX-dev"
 ```
-### Create a new namespace
+### 2. Create a new namespace
 
 1. Open a browser to cloud.ibm.com, select Kedar's account and open the resource list.
 
@@ -28,7 +28,7 @@ export DEV_NAMESPACE="userXX-dev"
 oc create namespace "${DEV_NAMESPACE}"
 ```
 
-### Provision Jenkins ephemeral
+### 3. Provision Jenkins ephemeral
 
 Jenkins ephemeral provides a kubernetes native version of Jenkins that dynamically provisions build agents on-demand. It's
 _ephemeral_ meaning it doesn't allocate any persistent storage in the cluster.
@@ -42,7 +42,7 @@ oc new-app jenkins-ephemeral -n "${DEV_NAMESPACE}"
 2. Open the OpenShift console and navigate to your project/namespace (i.e. user01-dev) to see the Jenkins instance running
 
 
-### Create a project from the template in the FastStart git org
+### 4. Create a project from the template in the FastStart git org
 
 For the lab, we need a deployable application to run the pipeline. We will use a pre-built Code Pattern
 to expedite things.
@@ -53,7 +53,7 @@ to expedite things.
 4. Click `Create repository from template`, select the `faststart-dev-lab` org, and give the repo a unique name.
 5. Once you press `Create` it will fork the repo without the history into the new repo.
 
-### Create the ConfigMap and Secret to describe the cluster
+### 5. Create the ConfigMap and Secret to describe the cluster
 
 The pipeline needs certain information about the cluster to be able to push the image to the registry and 
 deploy the image to the cluster. Instead of hard coding those values into the Jenkinsfile, we will store them
@@ -124,7 +124,7 @@ kubectl create -n ${DEV_NAMESPACE} -f ibmcloud-config.yaml
 where:
  - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
 
-### Create git secret
+### 6. Create git secret
 
 In order for Jenkins have access to the git repository, particularly if it is a private repository, a Kubernetes secret 
 needs to be added that contains the git credentials.
@@ -164,7 +164,7 @@ kubectl create -n ${DEV_NAMESPACE} -f gitsecret.yaml
 where:
  - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
 
-### Create the build config
+### 7. Create the build config
 
 On OpenShift 3.11, Jenkins is built into the OpenShift pipelines and the build pipelines can be managed using Kubernetes 
 custom resources. We will create one by hand to create the build pipeline for our new application.
@@ -211,7 +211,27 @@ oc create -n ${DEV_NAMESPACE} -f buildconfig.yaml
 where:
  - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
 
-### View the pipeline in the OpenShift console
+### 8. Copy the pull secrets into your namespace
+
+1. Download the shell script that sets up the pull secrets
+
+```
+curl -O https://raw.githubusercontent.com/ibm-garage-cloud/garage-terraform-modules/master/generic/cluster/namespaces/scripts/setup-namespace-pull-secrets.sh
+```
+
+2. Make the file executable
+
+```
+chmod +x setup-namespace-pull-secrets.sh
+```
+
+3. Run the script to copy the pull secrets into the namespace and add them to the default service account
+
+```
+./setup-namespace-pull-secrets.sh ${DEV_NAMESPACE}
+```
+
+### 9. View the pipeline in the OpenShift console
 
 1. Open the OpenShift console for the cluster
 2. Select your project/namespace (i.e. `${DEV_NAMESPACE}`)
@@ -219,7 +239,7 @@ where:
 4. The build pipeline that was created in the previous step should appear
 5. Manually trigger the pipeline by pressing the `Build` button
 
-### Create the webhook
+### 10. Create the webhook
 
 1. Run the following to get the webhook details from the build config 
 
@@ -249,7 +269,7 @@ In our case `{secret}` will be `my-secret-value`
    
 7. Go to the Build pipeline page in the OpenShift console to see that the build was triggered
 
-### Bind the credentials for the cloudant database into the cluster
+### 11. Bind the credentials for the cloudant database into the cluster
 
 In order to use a service within the cluster, the service credentials should be added to the cluster as a secret. For
 this step, an existing Cloudant service has been created within the resource group that we will bind into the cluster.
