@@ -53,3 +53,11 @@ need to be performed to make Artifactory available to the pipeline.
 7. Expand `generic-local` and you should see a folder that matches the resource group name (e.g. faststart-one)
 8. Expand the resource group folder and you should see an index.yaml and helm chart tarball that were produced by the
 build
+
+### Register Artifactory helm repository with ArgoCD
+
+In order for ArgoCD to deploy helm charts from a helm repository, those helm repositories must first be registered.
+Since the final steps to configure Artifactory were manual, there are a couple of manual steps required to 
+register the Artifactory helm repository with ArgoCD.
+
+1. Use the following steps to register the Artifactory helm repository with ArgoCD - https://ibm-garage-cloud.github.io/ibm-garage-developer-guide/admin/argocd-setup
