@@ -5,3 +5,6 @@ section uses some terraform scripts to automate the install of other development
 
 1. [Part 1](./01-manual-deploy.md)
 2. [Part 2](./02-terraform.md)
+
+
+[Common questions/issues](./FAQ.md)
