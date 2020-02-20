@@ -39,3 +39,17 @@ scripts to run.
 4. In about 5 minutes the process will complete (note: the tools may not be available yet)
 5. Open the OpenShift console to look at the deployments and pods in your namespace
 
+### Set up the Artifactory instance
+
+The oss version of Artifactory we are using doesn't allow CLI access so there are a couple of manual steps that 
+need to be performed to make Artifactory available to the pipeline.
+
+1. Follow the steps described here to complete the installation of Artifactory - https://ibm-garage-cloud.github.io/ibm-garage-developer-guide/admin/artifactory-setup
+2. Once the steps are completed, open the OpenShift console, select your project/namespace (userXX-dev) and go to Build -> Pipelines
+3. Select `Start Build` to kickoff your Build
+4. Once the build has completed, within the OpenShift console go to Networking -> Routes and click on the Artifactory route
+5. Log in with admin/password
+6. Click the top icon on the left to open the registry list
+7. Expand `generic-local` and you should see a folder that matches the resource group name (e.g. faststart-one)
+8. Expand the resource group folder and you should see an index.yaml and helm chart tarball that were produced by the
+build
