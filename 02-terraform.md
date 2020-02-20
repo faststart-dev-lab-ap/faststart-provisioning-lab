@@ -2,7 +2,7 @@
 
 ## Provision dev tools with scripts
 
-### Look at the provided terraform modules
+### 1. Look at the provided terraform modules
 
 The automated scripts have been provided in two parts - 1) a set of reusable, pluggable modules and 2) a set of "stages"
 that put those modules together to set up an environment.
@@ -16,7 +16,7 @@ Each module has the same basic structure:
 - Module output variables are defined in `outputs.tf`
 - Module logic is defined in `main.tf`
   
-### Setup the terraform scripts
+### 2. Setup the terraform scripts
 
 For the purposes of the lab and for the sake of time, a stripped down version of the `iteration-zero` repository has been
 created that installs a subset of the basic components. It requires a little bit of setup before the scripts can be run
@@ -28,7 +28,7 @@ to allow the script to access the cluster.
 4. Open `terraform/settings/environment.tfvars". Set the 'cluster_name' and the 'resource_group_name' to 
 match the cluster you've been assigned
 
-### Run the terraform scripts
+### 3. Run the terraform scripts
 
 Once the scripts are configured, they can be executed. A docker image is provided that sets up the tools required for the
 scripts to run.
@@ -39,7 +39,7 @@ scripts to run.
 4. In about 5 minutes the process will complete (note: the tools may not be available yet)
 5. Open the OpenShift console to look at the deployments and pods in your namespace
 
-### Set up the Artifactory instance
+### 4. Set up the Artifactory instance
 
 The oss version of Artifactory we are using doesn't allow CLI access so there are a couple of manual steps that 
 need to be performed to make Artifactory available to the pipeline.
@@ -54,10 +54,36 @@ need to be performed to make Artifactory available to the pipeline.
 8. Expand the resource group folder and you should see an index.yaml and helm chart tarball that were produced by the
 build
 
-### Register Artifactory helm repository with ArgoCD
+### 5. Register Artifactory helm repository with ArgoCD
 
 In order for ArgoCD to deploy helm charts from a helm repository, those helm repositories must first be registered.
 Since the final steps to configure Artifactory were manual, there are a couple of manual steps required to 
 register the Artifactory helm repository with ArgoCD.
 
 1. Use the following steps to register the Artifactory helm repository with ArgoCD - https://ibm-garage-cloud.github.io/ibm-garage-developer-guide/admin/argocd-setup
+
+### 6. Enable ArgoCD in the CI pipeline
+
+The Jenkins pipeline from the sample application has a final stage that will trigger the CD pipeline. To do that, a 
+GitOps repository first needs to be configured with the details of the application that will be deployed. After that 
+the GitOps repository will need to be made available to the pipeline through a Secret.
+
+1. Export an environment variable for your namespace
+
+```
+export TEST_NAMESPACE="userXX-test"
+```
+
+where:
+- `userXX` is the user id assigned
+
+2. Create a namespace that will be used as your "test" environment
+
+```
+oc create namespace ${TEST_NAMESPACE}
+```
+
+3. Follow the instructions found here to set up the ArgoCD pipeline - https://ibm-garage-cloud.github.io/ibm-garage-developer-guide/guides/continuous-delivery
+
+**Note**
+When configuring the application within ArgoCD, use the TEST_NAMESPACE for the destination namespace
