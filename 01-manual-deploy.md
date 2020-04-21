@@ -143,7 +143,7 @@ where:
 2. Get the cluster information
 
 ```
-ibmcloud ks cluster get --cluster {cluster-name}
+ibmcloud ks cluster get --cluster faststart-ap-cluster
 ```
 
 3. Copy the following into a file named ibmcloud-config.yaml and update the values from the output of the previous command
@@ -158,7 +158,7 @@ metadata:
   name: ibmcloud-config
 data:
   APIURL: 'https://cloud.ibm.com'
-  CLUSTER_NAME: {CLUSTER_NAME}
+  CLUSTER_NAME: faststart-ap-cluster
   CLUSTER_TYPE: openshift
   INGRESS_SUBDOMAIN: {INGRESS_SUBDOMAIN}
   REGION: au-syd
