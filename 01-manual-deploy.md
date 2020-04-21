@@ -86,7 +86,11 @@ _ephemeral_ meaning it doesn't allocate any persistent storage in the cluster.
 oc new-app jenkins-ephemeral -n "${DEV_NAMESPACE}"
 ```
 
-2. Open the OpenShift console and navigate to your project/namespace (i.e. user01-dev) to see the Jenkins instance running
+2. Open the OpenShift console as described in the login steps above
+
+3. Select `Workloads -> Pods` from the left-hand menu
+
+4. At the top of the page select your project/namespace (i.e. user01-dev) from the drop-down list to see the Jenkins instance running
 
 ### 5. Create a project from the template in the FastStart git org
 
@@ -99,6 +103,8 @@ to expedite things.
 5. Once you press `Create` it will fork the repo without the history into the new repo.
 
 ### 6. Copy the pull secrets into your namespace
+
+Our pipeline will be using the IBM Cloud container registry to store the built images. In order for the cluster to read from the registry during deployment into the namespace, the secrets containing the credentials need to be added to the namespace. The following steps will set them up.
 
 1. Download the shell script that sets up the pull secrets
 
@@ -127,7 +133,7 @@ in a ConfigMap and Secret.
 1. Log into the ibmcloud cli
 
 ```
-ibmcloud login -r us-south -g {resource-group} [--sso]
+ibmcloud login -r ap-south -g {resource-group} [--sso]
 ```
 
 where:
@@ -155,8 +161,8 @@ data:
   CLUSTER_NAME: {CLUSTER_NAME}
   CLUSTER_TYPE: openshift
   INGRESS_SUBDOMAIN: {INGRESS_SUBDOMAIN}
-  REGION: us-south
-  REGISTRY_NAMESPACE: {RESOURCE_GROUP}
+  REGION: ap-south
+  REGISTRY_NAMESPACE: faststart-one
   REGISTRY_URL: us.icr.io
   RESOURCE_GROUP: {RESOURCE_GROUP}
   SERVER_URL: {MASTER_URL}
@@ -192,7 +198,9 @@ where:
 In order for Jenkins have access to the git repository, particularly if it is a private repository, a Kubernetes secret 
 needs to be added that contains the git credentials.
 
-1. Copy the following into a file called `gitsecret.yaml` and update the {Name}, {Git-Repo-URL}, {Git-Username}, and {Git-PAT}
+1. Create a personal access token (if you don't already have one) using the following instructions - https://cloudnativetoolkit.dev/getting-started/prereqs#configure-github-personal-access-token
+
+2. Copy the following into a file called `gitsecret.yaml` and update the {Git-Username}, and {Git-PAT}
 
 ```
 apiVersion: v1
@@ -213,9 +221,7 @@ where:
  - `Git-Username` is the username that has access to the git repo
  - `Git-PAT` is the personal access token of the git user
 
-2. From the IBM Cloud console, Log into the cluster following the instructions on the `Access` tab of the cluster page
-
-3. Create the secret in the cluster
+2. Assuming you are still logged into the cluster, create the secret by running the following:
 
 ```
 kubectl create -n ${DEV_NAMESPACE} -f gitsecret.yaml
