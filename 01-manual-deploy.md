@@ -208,7 +208,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   annotations:
-    build.openshift.io/source-secret-match-uri-1: https://github.com/ibm-garage-cloud/*
+    build.openshift.io/source-secret-match-uri-1: https://github.com/*
   labels:
     jenkins.io/credentials-type: usernamePassword
   name: git-credentials
