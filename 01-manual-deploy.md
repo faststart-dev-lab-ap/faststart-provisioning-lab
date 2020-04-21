@@ -1,6 +1,6 @@
 # Part 1 - Manual deploy 
 
-## Deploy app to Jenkins on OCP 3.11
+## Deploy app to Jenkins on OCP 4.3
 
 For these exercises you will be asked for a `DEV_NAMESPACE`. That value should be the name 
 you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
@@ -47,10 +47,9 @@ oc new-app jenkins-ephemeral -n "${DEV_NAMESPACE}"
 For the lab, we need a deployable application to run the pipeline. We will use a pre-built Code Pattern
 to expedite things.
 
-1. Open a browser to https://github.com/ibm-garage-cloud/template-node-typescript
+1. Open a browser to https://github.com/IBM/template-node-typescript
 2. Click the green `Use this template` button
-3. On the following page, select the FastStart git org for the owner and give the repo a name
-4. Click `Create repository from template`, select the `faststart-dev-lab` org, and give the repo a unique name.
+3. On the following page, select the `faststart-dev-lab` org, and give the repo a unique name.
 5. Once you press `Create` it will fork the repo without the history into the new repo.
 
 ### 5. Create the ConfigMap and Secret to describe the cluster
