@@ -1,5 +1,35 @@
 # Part 1 - Manual deploy 
 
+## Prerequisites
+
+### Git client
+
+The git client needs to be installed in your development operating system. It comes as standard for Mac OS.
+
+https://git-scm.com/
+
+### IBM Cloud cli
+
+The IBM Cloud cli is required for management of IBM Cloud Account and management of your managed IBM Kubernetes and Red Hat OpenShift clusters - https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started
+
+Don’t install just the IBM Cloud CLI, install the IBM Cloud CLI and Developer Tools
+
+```
+curl -sL https://ibm.biz/idt-installer | bash
+```
+
+Note: If you log in to the web UI using SSO, you’ll need to create an API key for logging into the CLI. (You can also use this API key for installing the Developer Environment.)
+
+### OpenShift cli
+
+The OpenShift cli is required for Red Hat OpenShift management and development
+
+1. Download the appropriate client tar ball from the mirror site - https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/
+
+2. Unpack the tar ball
+
+3. Copy the `oc` and `kubectl` from the unpacked folder into your terminal PATH (e.g. /usr/local/bin)
+
 ## Deploy app to Jenkins on OCP 4.3
 
 For these exercises you will be asked for a `DEV_NAMESPACE`. That value should be the name 
@@ -17,31 +47,29 @@ export DEV_NAMESPACE="userXX-dev"
 
 1. Open the IBM Cloud console - https://cloud.ibm.com
 
-2. Open the `Resource List` from the menu and filter the list by setting the resource group filter to `faststart-one`
+2. Select Kedar's account from the account list
 
-3. Find the `faststart-ap-cluster` in the list and click on it to open the overview page
+3. Open the `Resource List` from the menu and filter the list by setting the resource group filter to `faststart-one`
 
-4. Click on the `OpenShift web console` button to launch the OpenShift console
+4. Find the `faststart-ap-cluster` in the list and click on it to open the overview page
 
-5. Within the console, click on the drop-down in the top-right that contains your user id and select `Copy Login Command`
+5. Click on the `OpenShift web console` button to launch the OpenShift console
 
-6. Click the `Display Token` link and copy the login command shown. It should look something like the following:
+6. Within the console, click on the drop-down in the top-right that contains your user id and select `Copy Login Command`
+
+7. Click the `Display Token` link and copy the login command shown. It should look something like the following:
 
     ```
     oc login --token=XXX --server=XXX
     ```
 
-7. Run the command from your command-line to log in to the cluster
+8. Run the command from your command-line to log in to the cluster
 
 ### 3. Create a new namespace
 
-1. Open a browser to cloud.ibm.com, select Kedar's account and open the resource list.
+We will all be working in the same cluster but in different namespaces. You will need to create a namespace based on the name that you were assigned.
 
-2. Filter the resource groups to the `faststart-xxx` resource group.
-
-3. Follow the instructions to login.
-
-4. Create the namespace
+1. Run the following to create the namespace
 
 ```
 oc create namespace "${DEV_NAMESPACE}"
