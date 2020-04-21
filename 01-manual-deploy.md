@@ -133,7 +133,7 @@ in a ConfigMap and Secret.
 1. Log into the ibmcloud cli
 
 ```
-ibmcloud login -r ap-south -g {resource-group} [--sso]
+ibmcloud login -r au-syd -g {resource-group} [--sso]
 ```
 
 where:
@@ -161,9 +161,9 @@ data:
   CLUSTER_NAME: {CLUSTER_NAME}
   CLUSTER_TYPE: openshift
   INGRESS_SUBDOMAIN: {INGRESS_SUBDOMAIN}
-  REGION: ap-south
+  REGION: au-syd
   REGISTRY_NAMESPACE: faststart-one
-  REGISTRY_URL: us.icr.io
+  REGISTRY_URL: au.icr.io
   RESOURCE_GROUP: {RESOURCE_GROUP}
   SERVER_URL: {MASTER_URL}
   TLS_SECRET_NAME: {INGRESS_SECRET_NAME}
