@@ -1,5 +1,13 @@
 # Part 2 - Terraform
 
+## Prerequisites
+
+### Docker Desktop
+
+Docker Desktop is required to run the Developer Tools Image (among other things) on your local machine.
+
+Use the following link to install it - https://www.docker.com/products/docker-desktop
+
 ## Provision dev tools with scripts
 
 ### 1. Look at the provided terraform modules
@@ -25,8 +33,10 @@ to allow the script to access the cluster.
 1. Clone the faststart iteration-zero repo - https://github.com/ibm-garage-cloud/iteration-zero-faststart
 2. Copy `credentials.template` into a file named `credentials.properties`
 3. In `credentials.properties`, replace {IBMCLOUD_API_KEY} with the APIKEY from the top of the box note
-4. Open `terraform/settings/environment.tfvars". Set the 'cluster_name' and the 'resource_group_name' to 
-match the cluster you've been assigned
+4. Open `terraform/settings/environment.tfvars`. Set the the following values:
+  - `cluster_name` to `faststart-ap-cluster` 
+  - `resource_group_name` to `faststart-one`
+  - `tools_namespace` to a value based on your assigned user id (e.g. `userXX-tools`)
 
 ### 3. Run the terraform scripts
 
