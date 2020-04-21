@@ -133,7 +133,7 @@ in a ConfigMap and Secret.
 1. Log into the ibmcloud cli
 
 ```
-ibmcloud login -r au-syd -g {resource-group} [--sso]
+ibmcloud login -r au-syd -g faststart-one [--sso]
 ```
 
 where:
