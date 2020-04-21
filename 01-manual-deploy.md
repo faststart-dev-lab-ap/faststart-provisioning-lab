@@ -312,36 +312,3 @@ In our case `{secret}` will be `my-secret-value`
 6. Go back to your project code and push a change to one of the files
    
 7. Go to the Build pipeline page in the OpenShift console to see that the build was triggered
-
-### 12. Bind the credentials for the cloudant database into the cluster
-
-In order to use a service within the cluster, the service credentials should be added to the cluster as a secret. For
-this step, an existing Cloudant service has been created within the resource group that we will bind into the cluster.
-
-1. Log into the ibmcloud environment
-
-```
-ibmcloud login -r us-south -g {resource-group} [--sso]
-```
-
-2. Run the following command to bind the credentials into the cluster
-
-```
-ibmcloud ks cluster service bind --cluster {CLUSTER_NAME} --namespace ${DEV_NAMESPACE} --service {SERVICE_NAME} --key faststart-key
-```
-
-where:
- - `{CLUSTER_NAME}` is the name of the cluster
- - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
- - `{SERVICE_NAME}` is the name of the cloudant service (either faststart-one-cloudant or faststart-two-cloudant)
-
-**Note**: the value `faststart-key` for the key works because we created that key ahead of time
-
-3. Open the OpenShift console and select the `${DEV_NAMESPACE}` project
-   
-4. Select Resources -} Secrets. Select the `binding-...` secret from the list
-   
-5. Press the `Reveal values` button to see the contents of the secret
-
-We won't be doing it in this lab, but in order to access the Cloudant instance from an application component that secret
-would be attached to the Deployment/Pod through an environment reference.
