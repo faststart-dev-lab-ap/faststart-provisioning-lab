@@ -90,7 +90,7 @@ oc new-app jenkins-ephemeral -n "${DEV_NAMESPACE}"
 
 3. Select `Workloads -> Pods` from the left-hand menu
 
-4. At the top of the page select your project/namespace (i.e. user01-dev) from the drop-down list to see the Jenkins instance running
+4. At the top of the page select your project/namespace (e.g. user01-dev) from the drop-down list to see the Jenkins instance running
 
 ### 5. Create a project from the template in the FastStart git org
 
