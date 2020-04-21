@@ -178,6 +178,7 @@ metadata:
 type: Opaque
 stringData:
   APIKEY: {APIKEY}
+  REGISTRY_PASSWORD: {APIKEY}
   REGISTRY_USER: iamapikey
 ```
 
