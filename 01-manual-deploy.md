@@ -231,7 +231,7 @@ kubectl create -n ${DEV_NAMESPACE} -f gitsecret.yaml
 where:
  - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
 
-### 9. Create the build config
+### 9a. Create the build config
 
 On OpenShift 4.3, Jenkins is built into the OpenShift pipelines and the build pipelines can be managed using Kubernetes 
 custom resources. We will create one by hand to create the build pipeline for our new application.
@@ -271,6 +271,20 @@ where:
 
 ```
 oc create -n ${DEV_NAMESPACE} -f buildconfig.yaml
+```
+
+where:
+ - `${DEV_NAMESPACE}` should be the name you claimed in the box note prefixed to `-dev` (e.g. user01-dev)
+
+### 9b. Give the `jenkins` service account `privileged` access
+
+The pipeline in the project you've deployed uses `buildah` to build and push the container image to the registry. Unfortunately, the buildah container must run as root. By default, OpenShift does not allow containers to run as the root user and special permission is required for the pipeline to run.
+
+With the Jenkins build engine, all the build processes run as the `jenkins` service account. In order for the pipeline container to run as root on OpenShift we will need to give the `privileged` security context constraint (scc) to `jenkins` service account with the following command:
+
+```
+oc project ${DEV_NAMESPACE}
+oc adm policy add-scc-to-user privileged -z jenkins
 ```
 
 where:
