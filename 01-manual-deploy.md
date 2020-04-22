@@ -30,6 +30,14 @@ The OpenShift cli is required for Red Hat OpenShift management and development
 
 3. Copy the `oc` and `kubectl` from the unpacked folder into your terminal PATH (e.g. /usr/local/bin)
 
+## Common problems
+
+1. If you have run the pipeline and get an error similar to the following then be sure to follow the instructions in **step 9b** to add the privileged scc to the jenkins service account
+
+   ```
+   Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "a.user08-dev-user08devpipeline2-whc23-88srb" is forbidden: unable to validate against any security context constraint: [spec.containers[3].securityContext.privileged:
+   ```
+
 ## Deploy app to Jenkins on OCP 4.3
 
 For these exercises you will be asked for a `DEV_NAMESPACE`. That value should be the name 
