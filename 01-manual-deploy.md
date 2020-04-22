@@ -72,7 +72,7 @@ We will all be working in the same cluster but in different namespaces. You will
 1. Run the following to create the namespace
 
 ```
-oc create namespace "${DEV_NAMESPACE}"
+oc new-project "${DEV_NAMESPACE}"
 ```
 
 ### 4. Provision Jenkins ephemeral
