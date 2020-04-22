@@ -32,7 +32,7 @@ The OpenShift cli is required for Red Hat OpenShift management and development
 
 ## Common problems
 
-1. If you have run the pipeline and get an error similar to the following then be sure to follow the instructions in **step 9b** to add the privileged scc to the jenkins service account
+1. If you have run the pipeline and get an error similar to the following then be sure to follow the instructions in [**step 9b**](#9b-give-the-jenkins-service-account-privileged-access) to add the privileged scc to the jenkins service account
 
    ```
    Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "a.user08-dev-user08devpipeline2-whc23-88srb" is forbidden: unable to validate against any security context constraint: [spec.containers[3].securityContext.privileged:
