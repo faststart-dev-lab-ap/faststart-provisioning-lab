@@ -141,7 +141,7 @@ in a ConfigMap and Secret.
 1. Log into the ibmcloud cli
 
 ```
-ibmcloud login -r au-syd -g faststart-one [--sso]
+ibmcloud login -r jp-tok -g faststart-one [--sso]
 ```
 
 where:
@@ -169,7 +169,7 @@ data:
   CLUSTER_NAME: faststart-ap-cluster
   CLUSTER_TYPE: openshift
   INGRESS_SUBDOMAIN: {INGRESS_SUBDOMAIN}
-  REGION: au-syd
+  REGION: jp-tok
   REGISTRY_NAMESPACE: faststart-one
   REGISTRY_URL: au.icr.io
   RESOURCE_GROUP: faststart-one
