@@ -279,10 +279,10 @@ where:
 ### 10. View the pipeline in the OpenShift console
 
 1. Open the OpenShift console for the cluster
-2. Select your project/namespace (i.e. `${DEV_NAMESPACE}`)
-3. Select Builds -} Pipelines
+2. Select Builds -> Build Config
+3. Select your project/namespace (i.e. `${DEV_NAMESPACE}`) from the top
 4. The build pipeline that was created in the previous step should appear
-5. Manually trigger the pipeline by pressing the `Build` button
+5. Manually trigger the pipeline by selecting `Start Build` the menu button on the right side of the row
 
 ### 11. Create the webhook
 
