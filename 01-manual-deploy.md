@@ -328,10 +328,14 @@ In our case `{secret}` will be `my-secret-value`
 
 3. Select `Settings` then `Webhooks`. Press `Add webhook`
 
-4. Paste the webhook url from the previous step into the `Payload url`. Leave the rest of the values as the defaults and press `Add webhook`
+4. Paste the webhook url from the previous step into the `Payload url`
 
-5. Press the button to test the webhook to ensure that everything was done properly
+5. Set the content-type to `application/json` and leave the rest of the values as the defaults
 
-6. Go back to your project code and push a change to one of the files
+6. Press `Add webhook` to create the webhook
+
+7. Press the button to test the webhook to ensure that everything was done properly
+
+8. Go back to your project code and push a change to one of the files
    
-7. Go to the Build pipeline page in the OpenShift console to see that the build was triggered
+9. Go to the Build pipeline page in the OpenShift console to see that the build was triggered
